@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  postgres:
+    image: registry.cri.epita.fr/ing/assistants/public/registry/postgres:15.2-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eplace
+    expose:
+      - 5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # Proper docker-compose would use named networks
+    # networks:
+    #   - postgres-network
+  redis:
+    image: registry.cri.epita.fr/ing/assistants/public/registry/redis:7.0.9-alpine
+    container_name: redis
+    restart: always
+    expose:
+      - 6379
+    volumes:
+      - redis-data:/data
+    # Proper docker-compose would use named networks
+    # networks:
+    #   - redis-network
+  eplace:
+    image: registry.cri.epita.fr/ing/assistants/public/registry/eplace:latest
+    container_name: eplace
+    restart: always
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./config:/usr/src/app/config
+      - type: 'bind'
+        source: './.env'
+        target: '/usr/src/app/.env'
+    ports:
+      - 3000:3000
+      - 3333:3333
+    # Proper docker-compose would use named networks
+    # networks:
+    #   - postgres-network
+    #   - redis-network
+    depends_on:
+      - postgres
+      - redis
+volumes:
+  postgres-data:
+  redis-data:
+    # Proper docker-compose would use named networks
+    # networks:
+    #   postgres-network:
+    #   redis-network:

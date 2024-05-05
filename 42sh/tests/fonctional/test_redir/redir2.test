@@ -1,0 +1,2 @@
+echo toto \n tata \t tab ici > file2
+cat file2

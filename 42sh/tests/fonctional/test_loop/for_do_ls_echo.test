@@ -1,0 +1,1 @@
+for x in 1 3 ; do ls; echo $x; done

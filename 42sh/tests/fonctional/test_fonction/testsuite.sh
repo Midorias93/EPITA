@@ -1,0 +1,3 @@
+run_test simple_fonction.test
+run_test moyen_fonction.test
+run_test erreur_fonction.test

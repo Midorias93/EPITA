@@ -1,0 +1,91 @@
+les mots en maj sont des mots protocol
+    sauf CR
+         LF
+         SP
+les espaces ne compte pas seules les trois exeptions represente des espaces
+
+la find d'un header est caractheriser par 2 CRLF
+
+{
+    HTTP-message  = start-line CRLF
+
+    [ message-body ]
+                        }
+
+la seule difference entre un request et une reponse et la start line
+    composition de la start line:
+        - soit une start line soit une line de status
+        - field line ou headers sont des information additionel appropos du message http
+        - le message-body si il est present est la pour contenir la request ou la reponse
+
+une request HTTP-message est envoye d'une client vers le server
+
+une resquest line est de la forme suivante
+
+{
+    Request-Line = Method SP Request-target SP HTTP-Version CRLF
+                                                                    }
+
+la request line commence par une methode suivi de la target puis du protocol
+
+la methode : indique la methode a utiliser sur la request target
+la request target : est la sible de la requette
+le protocol : le ptrotocol a utiliser stocke dans HTTP-Versoin
+
+[ header ] la taille du context n'est pas toujours present mais si elle l'est elle doit toujours etre check 
+[ header ] host (doit toujours etre la ?) doit match l'une des infos suivant du vhost :
+                                                            - server_name (e.g.www.exemple.com)
+                                                            - ip address (e.g. 127.0.0.1)
+                                                            - ip est port combine (e.g. 127.0.0.1:4242)
+
+
+une reponse HTTP-message est envoye du server au clien
+
+[ header ] la date est obligatoire  (utiliser strtime)
+[ header ] la taille du contenu est obligatoire
+
+
+utiliser sendfile pour les file descriptors
+
+une status line est de la forme suivante
+
+{
+    Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
+                                                                        }
+
+la status line commence par le ptrocol suivi par code de status puis de sont texte associe
+
+le ptrotocol : le ptrocole a utilset
+le code de status : est un nombre a 3 chiffres
+the reason-phrase : est un description du code de status
+
+
+un client ne peut envoyer qu'une seule request apres la connection avec ce client doit etre close
+tous les reponse doit avoir le header connection set a close
+
+
+les differents methodes :
+        - GET :
+            utilise pour recupere la target
+        - HEAD
+            paraille que get mais n'envoie pas le body
+            elle est utiliser pour recuperer des informations a propos de la resources sans la resource elle meme
+
+
+forme d'une request :
+{
+    DATE [SERV_NAME] received REQUEST_TYPE on 'TARGET' from CLIENT_IP
+                                                                        }
+
+forme d'une reponse :
+{
+    DATE [SERV_NAME] responding with STATUS_CODE to CLIENT_IP for REQUEST_TYPE on 'TARGET'
+                                                                                            }
+
+pour la date suivre le GMT format (Sun, 06 Nov 1994 08:49:37 GMT)
+
+
+
+protocl :
+        - TCP 
+        - UDP

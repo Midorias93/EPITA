@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>E/PLACE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <div class="App">
+      <div class="AlertContainer" id="alert-container"></div>
+      <div class="Container" id="container">
+        <div class="RoomList Hidden" id="left-container">
+          <div class="Header">
+            <h1 class="Title">E/PLACE</h1>
+            <button class="CloseButton" id="close-left">
+              <i class="fa-solid fa-backward"></i>
+            </button>
+          </div>
+          <div class="ListContainer">
+            <div class="ListSearchBar">
+              <div class="InputContainer">
+                <input
+                  aria-placeholder="Search a room..."
+                  placeholder="Search a room..."
+                  class="Input"
+                  id="search-input"
+                />
+                <div class="Divider"></div>
+                <button class="RoomButton" id="create-room">
+                  <i class="fa-solid fa-square-plus"></i>
+                </button>
+                <button class="RoomButton" id="refresh-rooms">
+                  <i class="fa-solid fa-rotate"></i>
+                </button>
+              </div>
+              <div class="FilterContainer">
+                <span class="FilterText">Filters:</span>
+                <div class="FilterHeader">
+                  <button class="Filter" id="filter-name">
+                    <span>Name</span>
+                    <i class="fa-solid fa-sort-down"></i>
+                  </button>
+                  <button class="Filter" id="filter-owner">
+                    <span>Owned by you</span>
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                  <button class="Filter" id="filter-public">
+                    <span>Public</span>
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <button class="Filter" id="filter-private">
+                    <span>Private</span>
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="RoomsContainer" id="rooms-container"></div>
+          </div>
+          <div class="StudentProfile">
+            <img src="" class="Avatar" id="profile-info-avatar" />
+            <div class="TextContainer">
+              <span class="Login" id="profile-info-login"></span>
+              <span class="Quote" id="profile-info-quote"></span>
+            </div>
+            <button class="ModifyProfileButton" id="profile-update">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+          </div>
+        </div>
+        <div class="RoomCanvas">
+          <div class="Header">
+            <div class="TextContainer">
+              <h2 class="Title" id="room-name">{{room_name}}</h2>
+              <span class="Description" id="room-description"
+                >{{room_description}}</span
+              >
+            </div>
+            <div class="HeaderDivider"></div>
+            <div class="ButtonContainer">
+              <button class="RoomButton" id="edit-room">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+              <button class="RoomButton" id="delete-room">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+              <button class="ReportButton">Report Abuse</button>
+            </div>
+          </div>
+          <div class="CanvasContainer" id="canvas-container">
+            <canvas class="Canvas" id="canvas"></canvas>
+            <img class="Selector" id="selector" src="/selector.svg" />
+            <div class="Tooltip" id="tooltip">
+              <div class="Header">
+                <div class="PlacedByInfo">
+                  <img
+                    src="{{student_avatar}}"
+                    class="Avatar"
+                    id="tooltip-info-avatar"
+                  />
+                  <div class="Profile">
+                    <span class="Login" id="tooltip-info-login"
+                      >{{student_login}}</span
+                    >
+                    <span class="Quote" id="tooltip-info-quote"
+                      >{{student_quote}}</span
+                    >
+                  </div>
+                </div>
+                <div class="TextContainer">
+                  <span id="tooltip-date">{{date_placed}}</span>
+                  <span id="tooltip-time">{{time_placed}}</span>
+                </div>
+              </div>
+              <div class="ButtonContainer">
+                <button class="ColorPicker" id="color-picker">
+                  <i class="fas fa-eye-dropper"></i>
+                </button>
+                <button class="PlaceButton" id="color-place-button">
+                  PLACE
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="PositionTooltip" id="position-tooltip">
+            <span>X=0</span>
+            <span>Y=0</span>
+          </div>
+          <div class="ColorWheelContainer" id="color-wheel-container">
+            <div class="ColorWheel" id="color-wheel"></div>
+          </div>
+        </div>
+        <div class="RoomChat" id="right-container">
+          <div class="ChatContainer">
+            <div class="Header">
+              <button class="CloseButton" id="close-right">
+                <i class="fa-solid fa-forward"></i>
+              </button>
+            </div>
+            <div class="ChatMessageContainer" id="chat-message-container"></div>
+            <form
+              class="InputContainer"
+              id="chat-input-form"
+              autocomplete="off"
+            >
+              <input
+                aria-placeholder="Type your message here..."
+                placeholder="Type your message here..."
+                class="Input"
+                id="message-content"
+                name="message-content"
+                autocomplete="off"
+              />
+              <div class="ChatTimeout">
+                <i class="fa-solid fa-stopwatch"></i>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

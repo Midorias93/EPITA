@@ -1,0 +1,7 @@
+foo()
+{
+    echo toto
+}
+unset -f foo
+foo
+ 

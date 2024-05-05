@@ -1,0 +1,17 @@
+run_test if_simple.test
+run_test if_echo_if.test
+run_test if_else_simple.test
+run_test if_elif__else_simple.test
+run_test if_elif__else_newline.test
+run_test if_elif__else_tabe.test
+run_test if_elif__else_newlinebegintoken.test
+run_test if_false.test
+run_test  if_false_solo.test
+run_test  if_true_solo.test
+run_test  if_true.test
+run_test bad_if.test
+run_test colliding_keyword.test
+run_test if_false.test
+run_test if_multiple_semicolon.test
+run_test bad_if_2.test
+run_test list_if.test

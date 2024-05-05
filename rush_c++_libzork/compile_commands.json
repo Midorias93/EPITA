@@ -1,0 +1,140 @@
+[
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/exceptions.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/exceptions.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/exceptions.cc",
+  "output": "CMakeFiles/libzork.dir/src/exceptions.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/choice.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/choice.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/choice.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/choice.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/choice_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/choice_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/choice_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/choice_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/html.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/html.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/html.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/html.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/html_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/html_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/html_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/html_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/interactive.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/interactive.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/interactive.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/interactive.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/runner.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/runner.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/runner.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/runner.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/smart.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/smart.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/smart.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/smart.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/runner/smart_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/runner/smart_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/runner/smart_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/runner/smart_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/store/store.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/store/store.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/store/store.cc",
+  "output": "CMakeFiles/libzork.dir/src/store/store.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/store/store_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/store/store_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/store/store_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/store/store_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/story/node.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/story/node.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/story/node.cc",
+  "output": "CMakeFiles/libzork.dir/src/story/node.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/story/node_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/story/node_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/story/node_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/story/node_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/story/story.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/story/story.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/story/story.cc",
+  "output": "CMakeFiles/libzork.dir/src/story/story.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/story/story_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/story/story_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/story/story_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/story/story_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/story/choice.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/story/choice.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/story/choice.cc",
+  "output": "CMakeFiles/libzork.dir/src/story/choice.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/vars/action.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/vars/action.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/vars/action.cc",
+  "output": "CMakeFiles/libzork.dir/src/vars/action.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/vars/action_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/vars/action_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/vars/action_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/vars/action_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/vars/condition.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/vars/condition.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/vars/condition.cc",
+  "output": "CMakeFiles/libzork.dir/src/vars/condition.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build",
+  "command": "/run/current-system/sw/bin/c++ -Dlibzork_EXPORTS -I/home/romain.labbe/afs/c++/rush/libzork/include -I/home/romain.labbe/afs/c++/rush/libzork/src -std=gnu++20 -fPIC -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/libzork.dir/src/vars/condition_impl.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/src/vars/condition_impl.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/src/vars/condition_impl.cc",
+  "output": "CMakeFiles/libzork.dir/src/vars/condition_impl.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build/zorkxplorer/src",
+  "command": "/run/current-system/sw/bin/c++  -I/home/romain.labbe/afs/c++/rush/libzork/include -std=gnu++20 -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/zork.dir/main.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/zorkxplorer/src/main.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/zorkxplorer/src/main.cc",
+  "output": "zorkxplorer/src/CMakeFiles/zork.dir/main.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build/zorkxplorer/src",
+  "command": "/run/current-system/sw/bin/c++  -I/home/romain.labbe/afs/c++/rush/libzork/include -std=gnu++20 -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/zork.dir/options.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/zorkxplorer/src/options.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/zorkxplorer/src/options.cc",
+  "output": "zorkxplorer/src/CMakeFiles/zork.dir/options.cc.o"
+},
+{
+  "directory": "/home/romain.labbe/afs/c++/rush/libzork/build/tests",
+  "command": "/run/current-system/sw/bin/c++  -I/home/romain.labbe/afs/c++/rush/libzork/include -std=gnu++20 -Wall -Wextra -Werror -std=c++20 -o CMakeFiles/test.dir/main.cc.o -c /home/romain.labbe/afs/c++/rush/libzork/tests/main.cc",
+  "file": "/home/romain.labbe/afs/c++/rush/libzork/tests/main.cc",
+  "output": "tests/CMakeFiles/test.dir/main.cc.o"
+}
+]

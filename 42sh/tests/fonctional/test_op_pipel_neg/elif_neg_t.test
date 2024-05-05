@@ -1,0 +1,1 @@
+if ! true; elif ! false; then echo toti; fi

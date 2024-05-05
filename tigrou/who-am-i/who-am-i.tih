@@ -1,0 +1,4 @@
+function who_am_i(age : int) =
+  (
+   if age <= 2 then print("TIGROS\n") else if age >= 3 & age <= 5 then print ("TIGROU\n") else print("TIGER\n")
+  )

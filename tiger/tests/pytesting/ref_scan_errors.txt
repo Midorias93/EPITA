@@ -1,0 +1,2 @@
+test_scan_errors.tig:1.1-10: \, in string: `\\,'
+test_scan_errors.tig:1.1-21: unterminated string: `'

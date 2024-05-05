@@ -1,0 +1,5030 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "E/PLACE API",
+    "description": "Publicly available API for E/PLACE",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/api"
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "operationId": "status",
+        "summary": "Get the status of the API",
+        "description": "Get the status of the API",
+        "tags": [
+          "Misc"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reload-config": {
+      "put": {
+        "operationId": "reloadConfig",
+        "summary": "Reload the config",
+        "description": "Reload the config",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "env": {
+                      "type": "object",
+                      "properties": {
+                        "NODE_ENV": {
+                          "type": "string",
+                          "enum": [
+                            "development",
+                            "test",
+                            "production"
+                          ]
+                        },
+                        "SERVER_PORT": {
+                          "type": "string"
+                        },
+                        "WSS_PORT": {
+                          "type": "string"
+                        },
+                        "POSTGRES_HOST": {
+                          "type": "string"
+                        },
+                        "POSTGRES_USER": {
+                          "type": "string"
+                        },
+                        "POSTGRES_PASSWORD": {
+                          "type": "string"
+                        },
+                        "POSTGRES_DB": {
+                          "type": "string"
+                        },
+                        "POSTGRES_PORT": {
+                          "type": "string"
+                        },
+                        "POSTGRES_SCHEMA": {
+                          "type": "string"
+                        },
+                        "DATABASE_URL": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "REDIS_HOST": {
+                          "type": "string"
+                        },
+                        "REDIS_PORT": {
+                          "type": "string"
+                        },
+                        "PUBLIC_API_URL": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "JWKS_URI": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "ADMIN_UID_LIST": {
+                          "type": "string"
+                        },
+                        "RATE_LIMITS_CONFIG_PATH": {
+                          "type": "string"
+                        },
+                        "ROOMS_CONFIG_PATH": {
+                          "type": "string"
+                        },
+                        "DISABLE_ADMIN_PREVILEGES": {
+                          "type": "string"
+                        },
+                        "DISABLE_AUTH": {
+                          "type": "string"
+                        },
+                        "DISABLE_RATE_LIMITING": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "NODE_ENV",
+                        "SERVER_PORT",
+                        "WSS_PORT",
+                        "POSTGRES_HOST",
+                        "POSTGRES_USER",
+                        "POSTGRES_PASSWORD",
+                        "POSTGRES_DB",
+                        "POSTGRES_PORT",
+                        "POSTGRES_SCHEMA",
+                        "DATABASE_URL",
+                        "REDIS_HOST",
+                        "REDIS_PORT",
+                        "PUBLIC_API_URL",
+                        "JWKS_URI",
+                        "ADMIN_UID_LIST",
+                        "RATE_LIMITS_CONFIG_PATH",
+                        "ROOMS_CONFIG_PATH",
+                        "DISABLE_ADMIN_PREVILEGES",
+                        "DISABLE_AUTH",
+                        "DISABLE_RATE_LIMITING"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "roomsConfig": {
+                      "type": "object",
+                      "properties": {
+                        "rooms": {
+                          "type": "object",
+                          "properties": {
+                            "default": {
+                              "type": "object",
+                              "properties": {
+                                "metadata": {
+                                  "type": "object",
+                                  "properties": {
+                                    "canvasDimensions": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "settings": {
+                                  "type": "object",
+                                  "properties": {
+                                    "roomColors": {},
+                                    "defaultCanvas": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "rateLimits": {
+                                  "type": "object",
+                                  "properties": {
+                                    "testsLimiter": {},
+                                    "getCanvasLimiter": {},
+                                    "getPixelLimiter": {},
+                                    "placePixelLimiter": {},
+                                    "getRoomsLimiter": {},
+                                    "getRoomConfigLimiter": {},
+                                    "createRoomLimiter": {},
+                                    "updateRoomLimiter": {},
+                                    "deleteRoomLimiter": {},
+                                    "getStudentLimiter": {},
+                                    "updateStudentLimiter": {},
+                                    "sendMessageLimiter": {},
+                                    "reportRoomLimiter": {}
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "metadata",
+                                "settings",
+                                "rateLimits"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "epi-place": {
+                              "type": "object",
+                              "properties": {
+                                "metadata": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {},
+                                    "description": {},
+                                    "canvasDimensions": {},
+                                    "isPublic": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "settings": {
+                                  "type": "object",
+                                  "properties": {
+                                    "roomColors": {},
+                                    "defaultCanvas": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "rateLimits": {
+                                  "type": "object",
+                                  "properties": {
+                                    "testsLimiter": {},
+                                    "getCanvasLimiter": {},
+                                    "getPixelLimiter": {},
+                                    "placePixelLimiter": {},
+                                    "getRoomsLimiter": {},
+                                    "getRoomConfigLimiter": {},
+                                    "createRoomLimiter": {},
+                                    "updateRoomLimiter": {},
+                                    "deleteRoomLimiter": {},
+                                    "getStudentLimiter": {},
+                                    "updateStudentLimiter": {},
+                                    "sendMessageLimiter": {},
+                                    "reportRoomLimiter": {}
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "metadata",
+                                "settings",
+                                "rateLimits"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "koth": {
+                              "type": "object",
+                              "properties": {
+                                "metadata": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {},
+                                    "description": {},
+                                    "canvasDimensions": {},
+                                    "isPublic": {},
+                                    "hidden": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "settings": {
+                                  "type": "object",
+                                  "properties": {
+                                    "roomColors": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "rateLimits": {
+                                  "type": "object",
+                                  "properties": {
+                                    "testsLimiter": {},
+                                    "getCanvasLimiter": {},
+                                    "getPixelLimiter": {},
+                                    "placePixelLimiter": {},
+                                    "getRoomsLimiter": {},
+                                    "getRoomConfigLimiter": {},
+                                    "createRoomLimiter": {},
+                                    "updateRoomLimiter": {},
+                                    "deleteRoomLimiter": {},
+                                    "getStudentLimiter": {},
+                                    "updateStudentLimiter": {},
+                                    "sendMessageLimiter": {},
+                                    "reportRoomLimiter": {}
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "metadata",
+                                "settings",
+                                "rateLimits"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "pvb": {
+                              "type": "object",
+                              "properties": {
+                                "metadata": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {},
+                                    "description": {},
+                                    "canvasDimensions": {},
+                                    "isPublic": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "settings": {
+                                  "type": "object",
+                                  "properties": {
+                                    "roomColors": {},
+                                    "defaultCanvas": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "events": {
+                                  "type": "object",
+                                  "properties": {
+                                    "colorationEvent": {},
+                                    "radiusEvent": {}
+                                  },
+                                  "additionalProperties": false
+                                },
+                                "rateLimits": {
+                                  "type": "object",
+                                  "properties": {
+                                    "testsLimiter": {},
+                                    "getCanvasLimiter": {},
+                                    "getPixelLimiter": {},
+                                    "placePixelLimiter": {},
+                                    "getRoomsLimiter": {},
+                                    "getRoomConfigLimiter": {},
+                                    "createRoomLimiter": {},
+                                    "updateRoomLimiter": {},
+                                    "deleteRoomLimiter": {},
+                                    "getStudentLimiter": {},
+                                    "updateStudentLimiter": {},
+                                    "sendMessageLimiter": {},
+                                    "reportRoomLimiter": {}
+                                  },
+                                  "additionalProperties": false
+                                }
+                              },
+                              "required": [
+                                "metadata",
+                                "settings",
+                                "events",
+                                "rateLimits"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "default",
+                            "epi-place",
+                            "koth",
+                            "pvb"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "maxRoomsCreatedPerUser": {}
+                      },
+                      "required": [
+                        "rooms"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "env",
+                    "roomsConfig"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/error": {
+      "get": {
+        "operationId": "tests-error",
+        "summary": "Return a server error",
+        "description": "Always return 500 Internal Server Error",
+        "tags": [
+          "Tests"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/invalid-token": {
+      "post": {
+        "operationId": "tests-invalid-token",
+        "summary": "Return an invalid token error",
+        "description": "Always return 401 Unauthorized \"Invalid token\"",
+        "tags": [
+          "Tests"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/expired-token": {
+      "post": {
+        "operationId": "tests-expired-token",
+        "summary": "Return a token expired error",
+        "description": "Always return 401 Unauthorized \"Token expired\"",
+        "tags": [
+          "Tests"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/too-many-requests": {
+      "get": {
+        "operationId": "tests-too-many-requests",
+        "summary": "Return a too many requests error",
+        "description": "Always return 429 Too Many Requests",
+        "tags": [
+          "Tests"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "operationId": "students-getStudents",
+        "summary": "Get all students",
+        "description": "Get all students",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "uid": {
+                        "type": "number"
+                      },
+                      "login": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "uid",
+                      "login"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "An array of students with their UID and login"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students/{id}": {
+      "get": {
+        "operationId": "students-getStudent",
+        "summary": "Get a student by UID or login",
+        "description": "Get a student by UID or login",
+        "tags": [
+          "Students (Mandatory)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The UID or login of the student"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "ADMIN",
+                          "YAKA",
+                          "ING1_LYON",
+                          "ING1_PARIS",
+                          "ING1_RENNES",
+                          "ING1_STRASBOURG",
+                          "ING1_TOULOUSE"
+                        ]
+                      }
+                    },
+                    "uid": {
+                      "type": "number"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "avatarURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "quote": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "currentRoomSlug": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "banUntil": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "groups",
+                    "uid",
+                    "login",
+                    "avatarURL",
+                    "quote",
+                    "currentRoomSlug",
+                    "banUntil"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "students-updateStudent",
+        "summary": "Update a student by UID or login",
+        "description": "Update a student by UID or login",
+        "tags": [
+          "Students (Optional)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatarURL": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "The URL of your avatar"
+                  },
+                  "quote": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "Your quote"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Your student UID or login"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "ADMIN",
+                          "YAKA",
+                          "ING1_LYON",
+                          "ING1_PARIS",
+                          "ING1_RENNES",
+                          "ING1_STRASBOURG",
+                          "ING1_TOULOUSE"
+                        ]
+                      }
+                    },
+                    "uid": {
+                      "type": "number"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "avatarURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "quote": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "currentRoomSlug": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "banUntil": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "groups",
+                    "uid",
+                    "login",
+                    "avatarURL",
+                    "quote",
+                    "currentRoomSlug",
+                    "banUntil"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students/{id}/ban": {
+      "post": {
+        "operationId": "students-banStudent",
+        "summary": "Ban a student by UID or login",
+        "description": "Ban a student by UID or by login. If no date is provided, the student will be unbanned.",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "banUntil": {
+                    "type": "string",
+                    "description": "The date until the student is banned"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "The reason of the ban"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The UID or login of the student"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "ADMIN",
+                          "YAKA",
+                          "ING1_LYON",
+                          "ING1_PARIS",
+                          "ING1_RENNES",
+                          "ING1_STRASBOURG",
+                          "ING1_TOULOUSE"
+                        ]
+                      }
+                    },
+                    "uid": {
+                      "type": "number"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "avatarURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "quote": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "currentRoomSlug": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "banUntil": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "groups",
+                    "uid",
+                    "login",
+                    "avatarURL",
+                    "quote",
+                    "currentRoomSlug",
+                    "banUntil"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms": {
+      "get": {
+        "operationId": "rooms-getRooms",
+        "summary": "Get all rooms",
+        "description": "List all the rooms available to the student",
+        "tags": [
+          "Rooms (Optional)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of available rooms",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Room"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "rooms-createRoom",
+        "summary": "Create a room",
+        "description": "Create a new room",
+        "tags": [
+          "Rooms (Optional)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the room"
+                  },
+                  "description": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "The description of the room"
+                  },
+                  "iconURL": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "The URL of the room's icon"
+                  },
+                  "isPublic": {
+                    "type": "boolean",
+                    "description": "Whether the room is public or not. Defaults to false"
+                  },
+                  "studentsWhitelist": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "description": "The list of students allowed to join the room. Effective only if isPublic is false. Accepts both UIDs and logins. Defaults to an empty array"
+                  },
+                  "studentsBlacklist": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "description": "The list of students not allowed to join the room. Effective only if isPublic is true. Accepts both UIDs and logins. Defaults to an empty array"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slug": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "iconURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "canvasDimensions": {
+                      "type": "number"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "studentsWhitelist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "studentsBlacklist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "ownerUid": {
+                      "type": "number"
+                    },
+                    "password": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hidden": {
+                      "type": "boolean"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "slug",
+                    "name",
+                    "description",
+                    "iconURL",
+                    "canvasDimensions",
+                    "isPublic",
+                    "studentsWhitelist",
+                    "studentsBlacklist",
+                    "ownerUid",
+                    "password",
+                    "hidden",
+                    "deleted",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}": {
+      "put": {
+        "operationId": "rooms-updateRoom",
+        "summary": "Update a room",
+        "description": "Update a room",
+        "tags": [
+          "Rooms (Optional)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the room"
+                  },
+                  "description": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "The description of the room"
+                  },
+                  "iconURL": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          "null"
+                        ],
+                        "nullable": true
+                      }
+                    ],
+                    "description": "The URL of the room's icon"
+                  },
+                  "isPublic": {
+                    "type": "boolean",
+                    "description": "Whether the room is public or not. Defaults to false"
+                  },
+                  "studentsWhitelist": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "description": "The list of students allowed to join the room. Effective only if isPublic is false. Accepts both UIDs and logins. Defaults to an empty array"
+                  },
+                  "studentsBlacklist": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "description": "The list of students not allowed to join the room. Effective only if isPublic is true. Accepts both UIDs and logins. Defaults to an empty array"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slug": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "iconURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "canvasDimensions": {
+                      "type": "number"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "studentsWhitelist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "studentsBlacklist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "ownerUid": {
+                      "type": "number"
+                    },
+                    "password": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hidden": {
+                      "type": "boolean"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "slug",
+                    "name",
+                    "description",
+                    "iconURL",
+                    "canvasDimensions",
+                    "isPublic",
+                    "studentsWhitelist",
+                    "studentsBlacklist",
+                    "ownerUid",
+                    "password",
+                    "hidden",
+                    "deleted",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "rooms-deleteRoom",
+        "summary": "Delete a room",
+        "description": "Delete a room",
+        "tags": [
+          "Rooms (Optional)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/config": {
+      "get": {
+        "operationId": "rooms-getRoomConfig",
+        "summary": "Get the room config",
+        "description": "Get the room config",
+        "tags": [
+          "Rooms (Mandatory)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "slug": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "enum": [
+                                "null"
+                              ],
+                              "nullable": true
+                            }
+                          ]
+                        },
+                        "iconURL": {
+                          "anyOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "enum": [
+                                "null"
+                              ],
+                              "nullable": true
+                            }
+                          ]
+                        },
+                        "canvasDimensions": {
+                          "type": "number"
+                        },
+                        "isPublic": {
+                          "type": "boolean"
+                        },
+                        "studentsWhitelist": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "studentsBlacklist": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "ownerUid": {
+                          "type": "number"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "slug",
+                        "name",
+                        "description",
+                        "iconURL",
+                        "canvasDimensions",
+                        "isPublic",
+                        "ownerUid",
+                        "createdAt"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "settings": {
+                      "type": "object",
+                      "properties": {
+                        "roomColors": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "roomColors"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "rateLimits": {
+                      "type": "object",
+                      "properties": {
+                        "testsLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "getCanvasLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "getPixelLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "placePixelLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "getRoomsLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "getRoomConfigLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "createRoomLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "updateRoomLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "deleteRoomLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "getStudentLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "updateStudentLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "sendMessageLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "reportRoomLimiter": {
+                          "type": "object",
+                          "properties": {
+                            "limit": {
+                              "type": "number"
+                            },
+                            "interval": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "limit",
+                            "interval"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "testsLimiter",
+                        "getCanvasLimiter",
+                        "getPixelLimiter",
+                        "placePixelLimiter",
+                        "getRoomsLimiter",
+                        "getRoomConfigLimiter",
+                        "createRoomLimiter",
+                        "updateRoomLimiter",
+                        "deleteRoomLimiter",
+                        "getStudentLimiter",
+                        "updateStudentLimiter",
+                        "sendMessageLimiter",
+                        "reportRoomLimiter"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "metadata",
+                    "settings",
+                    "rateLimits"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "rooms-changeRoomConfig",
+        "summary": "Load another json room config",
+        "description": "Load another json room config",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "settings": {
+                    "type": "object",
+                    "properties": {
+                      "roomColors": {
+                        "type": "string",
+                        "description": "The colors of the room"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "The settings to change"
+                  },
+                  "events": {
+                    "type": "object",
+                    "properties": {
+                      "colorationEvent": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "The type of the coloration event"
+                          },
+                          "groups": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "The groups of the coloration event"
+                          },
+                          "colorsSubSet": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            },
+                            "description": "The colors subset of the coloration event"
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "radiusEvent": {
+                        "type": "object",
+                        "properties": {
+                          "radius": {
+                            "type": "number",
+                            "description": "The radius of the event"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "rateLimitsOverride": {
+                    "type": "object",
+                    "properties": {
+                      "testsLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "getCanvasLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "getPixelLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "placePixelLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "getRoomsLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "getRoomConfigLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "createRoomLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "updateRoomLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "deleteRoomLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "getStudentLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "updateStudentLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "sendMessageLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "reportRoomLimiter": {
+                        "type": "object",
+                        "properties": {
+                          "limit": {
+                            "type": "number"
+                          },
+                          "interval": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "limit",
+                          "interval"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "testsLimiter",
+                      "getCanvasLimiter",
+                      "getPixelLimiter",
+                      "placePixelLimiter",
+                      "getRoomsLimiter",
+                      "getRoomConfigLimiter",
+                      "createRoomLimiter",
+                      "updateRoomLimiter",
+                      "deleteRoomLimiter",
+                      "getStudentLimiter",
+                      "updateStudentLimiter",
+                      "sendMessageLimiter",
+                      "reportRoomLimiter"
+                    ],
+                    "additionalProperties": false,
+                    "description": "The rate limits to override"
+                  }
+                },
+                "required": [
+                  "events"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/report": {
+      "post": {
+        "operationId": "rooms-reportRoom",
+        "summary": "Report a room",
+        "description": "Report a room",
+        "tags": [
+          "Misc"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "description": "The reason for the report"
+                  }
+                },
+                "required": [
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/yeet": {
+      "post": {
+        "operationId": "rooms-yeetFromRoom",
+        "summary": "Yeet a student from a room",
+        "description": "Yeet a student from a room",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "description": "The slug of the room. If empty, all rooms will be yeeted"
+                  },
+                  "studentsList": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "description": "The list of students to yeet. If empty, all students will be yeeted"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/canvas": {
+      "get": {
+        "operationId": "rooms-canvas-getCanvas",
+        "summary": "Get the canvas of a room",
+        "description": "Get the canvas of a room",
+        "tags": [
+          "Rooms (Mandatory)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pixels": {
+                      "type": "string",
+                      "description": "The pixels of the room"
+                    }
+                  },
+                  "required": [
+                    "pixels"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/canvas/pixels": {
+      "get": {
+        "operationId": "rooms-canvas-getPixel",
+        "summary": "Get the pixels of a room",
+        "description": "Get the pixels of a room",
+        "tags": [
+          "Rooms (Mandatory)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          },
+          {
+            "name": "posX",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "The X position of the pixel"
+          },
+          {
+            "name": "posY",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "The Y position of the pixel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "roomSlug": {
+                      "type": "string"
+                    },
+                    "posX": {
+                      "type": "number"
+                    },
+                    "posY": {
+                      "type": "number"
+                    },
+                    "color": {
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "enum": [
+                            "null"
+                          ],
+                          "nullable": true
+                        }
+                      ]
+                    },
+                    "placedByUid": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "enum": [
+                            "null"
+                          ],
+                          "nullable": true
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "roomSlug",
+                    "posX",
+                    "posY",
+                    "color",
+                    "timestamp",
+                    "placedByUid"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "rooms-canvas-placePixel",
+        "summary": "Place a pixel in a room",
+        "description": "Place a pixel in a room",
+        "tags": [
+          "Rooms (Mandatory)"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "posX": {
+                    "type": "number",
+                    "description": "The X position of the pixel"
+                  },
+                  "posY": {
+                    "type": "number",
+                    "description": "The Y position of the pixel"
+                  },
+                  "color": {
+                    "type": "number",
+                    "description": "The color index of the pixel"
+                  }
+                },
+                "required": [
+                  "posX",
+                  "posY",
+                  "color"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "roomSlug": {
+                      "type": "string"
+                    },
+                    "posX": {
+                      "type": "number"
+                    },
+                    "posY": {
+                      "type": "number"
+                    },
+                    "color": {
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "enum": [
+                            "null"
+                          ],
+                          "nullable": true
+                        }
+                      ]
+                    },
+                    "placedByUid": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "enum": [
+                            "null"
+                          ],
+                          "nullable": true
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "roomSlug",
+                    "posX",
+                    "posY",
+                    "color",
+                    "timestamp",
+                    "placedByUid"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/canvas/resize": {
+      "put": {
+        "operationId": "rooms-canvas-resizeCanvas",
+        "summary": "Resize the canvas of a room",
+        "description": "Resize the canvas of a room",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "newCanvasDimensions": {
+                    "type": "number",
+                    "description": "The new size of the room"
+                  }
+                },
+                "required": [
+                  "newCanvasDimensions"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slug": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "iconURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "canvasDimensions": {
+                      "type": "number"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "studentsWhitelist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "studentsBlacklist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "ownerUid": {
+                      "type": "number"
+                    },
+                    "password": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hidden": {
+                      "type": "boolean"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "slug",
+                    "name",
+                    "description",
+                    "iconURL",
+                    "canvasDimensions",
+                    "isPublic",
+                    "studentsWhitelist",
+                    "studentsBlacklist",
+                    "ownerUid",
+                    "password",
+                    "hidden",
+                    "deleted",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/canvas/reset": {
+      "put": {
+        "operationId": "rooms-canvas-resetCanvas",
+        "summary": "Reset the canvas of a room",
+        "description": "Reset the canvas of a room",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slug": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "iconURL": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "canvasDimensions": {
+                      "type": "number"
+                    },
+                    "isPublic": {
+                      "type": "boolean"
+                    },
+                    "studentsWhitelist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "studentsBlacklist": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "ownerUid": {
+                      "type": "number"
+                    },
+                    "password": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hidden": {
+                      "type": "boolean"
+                    },
+                    "deleted": {
+                      "type": "boolean"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "slug",
+                    "name",
+                    "description",
+                    "iconURL",
+                    "canvasDimensions",
+                    "isPublic",
+                    "studentsWhitelist",
+                    "studentsBlacklist",
+                    "ownerUid",
+                    "password",
+                    "hidden",
+                    "deleted",
+                    "createdAt"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{slug}/canvas/load": {
+      "post": {
+        "operationId": "rooms-canvas-loadCanvas",
+        "summary": "Load the canvas of a room",
+        "description": "Load the canvas of a room",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "backupId": {
+                    "type": "number",
+                    "description": "The id of the backup"
+                  }
+                },
+                "required": [
+                  "backupId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The slug of the room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InvalidToken": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Invalid token"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Token expired"
+                    }
+                  },
+                  "Unauthenticated": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "Unauthenticated"
+                    }
+                  },
+                  "Banned": {
+                    "value": {
+                      "code": "UNAUTHORIZED",
+                      "message": "You are banned"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotAdmin": {
+                    "value": {
+                      "code": "FORBIDDEN",
+                      "message": "You are not an admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "TooManyRequests": {
+                    "value": {
+                      "code": "TOO_MANY_REQUESTS",
+                      "message": "Too many requests"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "InternalServerError": {
+                    "value": {
+                      "code": "INTERNAL_SERVER_ERROR",
+                      "message": "An error occured"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "issues": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "message"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "message",
+                "code"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Room": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "iconURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "canvasDimensions": {
+            "type": "number"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "studentsWhitelist": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "studentsBlacklist": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "ownerUid": {
+            "type": "number"
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "hidden": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Student": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ADMIN",
+                "YAKA",
+                "ING1_LYON",
+                "ING1_PARIS",
+                "ING1_RENNES",
+                "ING1_STRASBOURG",
+                "ING1_TOULOUSE"
+              ]
+            }
+          },
+          "uid": {
+            "type": "number"
+          },
+          "login": {
+            "type": "string"
+          },
+          "avatarURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "quote": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentRoomSlug": {
+            "type": "string",
+            "nullable": true
+          },
+          "banUntil": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc"
+    },
+    {
+      "name": "Tests"
+    },
+    {
+      "name": "Rooms (Mandatory)"
+    },
+    {
+      "name": "Rooms (Optional)"
+    },
+    {
+      "name": "Students (Mandatory)"
+    },
+    {
+      "name": "Students (Optional)"
+    },
+    {
+      "name": "Admin"
+    }
+  ]
+}

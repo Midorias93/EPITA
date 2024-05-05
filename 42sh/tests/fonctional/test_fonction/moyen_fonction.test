@@ -1,0 +1,9 @@
+foo()
+{
+    bar()
+    {
+        echo toto
+    }
+}
+foo
+bar

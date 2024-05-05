@@ -1,0 +1,1 @@
+export X=42; echo ; export X; echo 

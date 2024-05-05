@@ -1,0 +1,12 @@
+drop table nexus.employees;
+drop table nexus_it.employees;
+drop table techwave.employees;
+drop table finstar.employees;
+drop table nexus_food.employees;
+drop table guardforce.employees;
+drop table nexus.nexus_relations;
+drop table nexus_it.software_assets;
+drop table techwave.project_milestones;
+drop table finstar.investments;
+drop table nexus_food.products;
+drop table guardforce.incident_reports;

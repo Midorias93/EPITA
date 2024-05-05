@@ -1,0 +1,10 @@
+run_test fonction_ls.test
+run_test fonction_find.test
+run_test fonction_ipa.test
+run_test fonction_clang__help.test
+run_test fonction_double_ls.test
+run_test fonction_ls_find.test
+run_test  fonction_echo.test
+run_test fonction_multiple.test
+run_test fonction_pwd.test
+run_test list_command.test

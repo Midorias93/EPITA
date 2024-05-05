@@ -1,0 +1,1 @@
+x=4; echo $x; unset x; echo $x

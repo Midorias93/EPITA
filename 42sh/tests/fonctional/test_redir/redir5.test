@@ -1,0 +1,5 @@
+echo toto >> file5
+echo titi >> file5
+echo tutu >> file5
+cat file5
+rm file5

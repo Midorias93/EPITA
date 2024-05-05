@@ -1,0 +1,3 @@
+echo test projet > file3
+tr e a < file3
+

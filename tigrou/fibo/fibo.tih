@@ -1,0 +1,19 @@
+function fibo(n:int):int =
+(
+if n < 0 then -1 else
+let
+    var a:int := 0
+    var b:int := 1
+    var i:int := 0
+    var temp:int := 0
+  in
+    while i < n do
+      (
+        temp := b;
+        b := a + b;
+        a := temp;
+        i := i + 1
+      );
+    a
+  end
+)

@@ -1,0 +1,19 @@
+Subject: [PROJET][SUJET] Résumé du problème
+
+Bonjour,
+
+Description détaillée du problème. Expliquez bien votre question
+pour avoir une réponse claire et précise.
+
+Optionnellement, des détails supplémentaires. Vous pouvez citer
+le sujet, expliquer votre interprétation du problème pour
+vérifier qu'elle
+correspond aux attentes de l'exercice, ou tout autre détail
+permettant aux élèves et aux assistants de mieux comprendre
+votre question.
+
+Cordialement,
+
+-- 
+Nom Prénom
+INGX 202X - EPITA

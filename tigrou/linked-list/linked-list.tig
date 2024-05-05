@@ -1,0 +1,24 @@
+let
+  import "linked-list.tih"
+  var list := node { value = 0, next = nil }
+
+  function test_lists(expected: string) =
+    (
+      print(concat("Expected : { ", expected));
+      print(" }\ngot      : { ");
+      display(list);
+      print(" }\n\n")
+    )
+in
+  test_lists("0");
+
+  print("Adding '1' ...\n");
+  append(list, 1);
+
+  test_lists("0 -> 1");
+
+  print("Adding '2' ...\n");
+  append(list, 2);
+
+  test_lists("0 -> 1 -> 2")
+end

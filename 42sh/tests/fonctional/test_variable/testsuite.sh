@@ -1,0 +1,16 @@
+run_test if_echo_x.test
+run_test echo_PWD.test
+run_test echo_var.test
+run_test echo_var_quoted.test
+run_test echo_var_double_quoted.test
+run_test echo_var_double_quoted_back.test
+run_test echo_random.test
+run_test echo_oldpwd.test
+run_test echo_uid.test
+run_test echo_ifs.test
+run_test echo_at.test
+run_test echo_star.test
+run_test echo_interrogation.test
+run_test echo_dolars.test
+run_test echo_1.test
+run_test echo_croisillon.test

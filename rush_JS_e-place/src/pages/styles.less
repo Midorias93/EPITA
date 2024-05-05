@@ -1,0 +1,905 @@
+@base: rgba(16, 18, 60, 0.95);
+@dark: #05061a;
+@light: #f0f0f0;
+@accent: #ff4603;
+
+.App {
+  background-color: @dark;
+  min-height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0rem;
+  position: relative;
+  text-align: center;
+  width: 100vw;
+}
+
+.AlertContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 2rem;
+  z-index: 3;
+  pointer-events: none;
+
+  .Alert {
+    position: relative;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    pointer-events: all;
+
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .Icon {
+      font-size: 28px;
+    }
+
+    .AlertBody {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0.5rem 2rem 0.5rem 0;
+      text-align: left;
+      font-family: Barlow;
+      color: @dark;
+
+      .AlertTitle {
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .AlertContent {
+        font-size: 0.75rem;
+        opacity: 50%;
+      }
+    }
+
+    .AlertClose {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 1em;
+      color: @dark;
+    }
+  }
+
+  .AlertSuccess {
+    border-left: 5px solid #49d761;
+
+    .Icon {
+      color: #49d761;
+    }
+  }
+  .AlertWarning {
+    border-left: 5px solid #ff9f1c;
+
+    .Icon {
+      color: #ff9f1c;
+    }
+  }
+  .AlertError {
+    border-left: 5px solid #fd2020;
+
+    .Icon {
+      color: #fd2020;
+    }
+  }
+}
+
+.Container {
+  column-gap: 2em;
+  display: grid;
+  flex-direction: row;
+  grid-auto-flow: row dense;
+  // Fully openned sidebars layout
+  // -> grid-template-columns: 1fr 2.5fr 1fr;
+  // Closed sidebars layout
+  grid-template-columns: 0fr 2.5fr 0fr;
+  height: calc(100vh - 4rem);
+  overflow: hidden;
+  padding: 2rem;
+
+  transition: all 0.5s ease-in-out;
+}
+
+.RoomList {
+  background-color: @base;
+  border-radius: 0.5rem;
+  display: grid;
+  flex-grow: 0;
+  gap: 0.5em 0em;
+  grid-template-rows: 1fr 8.25fr 0.75fr;
+  overflow: hidden;
+  padding: 1.5rem;
+  z-index: 1;
+  // Fully openned sidebar
+  // -> opacity: 1;
+  // Closed sidebar
+  opacity: 0;
+
+  transition: opacity 0.5s ease-in-out;
+
+  .Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    .Title {
+      color: @light;
+      font-family: Barlow;
+      font-size: 3rem;
+      font-weight: 800;
+      grid-row-start: 1;
+      overflow: hidden;
+      text-align: start;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+
+  .ListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1rem 0rem;
+    overflow: auto;
+    padding: 0rem;
+  }
+
+  .ListSearchBar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em 0em;
+
+    .FilterContainer {
+      background-color: rgba(black, 0.5);
+      align-items: center;
+      display: flex;
+      font-family: Barlow;
+      font-weight: 800;
+      font-size: 0.75rem;
+      gap: 0em 1em;
+      overflow: hidden;
+      text-align: start;
+      white-space: nowrap;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+
+      .FilterText {
+        margin-left: 0.5rem;
+        opacity: 0.5;
+        font-size: 0.8rem;
+      }
+
+      .FilterHeader {
+        display: flex;
+        font-family: Barlow;
+        font-weight: 800;
+        overflow: scroll;
+        scrollbar-width: none;
+        text-align: start;
+        gap: 0.5em;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .Filter {
+          background-color: rgba(@light, 0.25);
+          border-radius: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5em;
+          padding: 0.25rem 0.5rem;
+          font-size: 0.65rem;
+        }
+      }
+    }
+  }
+
+  .RoomsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    grid-row-start: 2;
+    overflow: scroll;
+
+    .Room {
+      background-color: rgba(black, 0.25);
+      border-radius: 0.5rem;
+      display: flex;
+      gap: 1em;
+      align-items: center;
+      padding: 0.5rem;
+
+      &:disabled {
+        border: @accent 0.15rem solid;
+        cursor: not-allowed;
+      }
+
+      .Avatar {
+        height: 4rem;
+        width: 4rem;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+      }
+
+      .TextContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5em;
+        color: @light;
+        overflow: hidden;
+
+        .Name {
+          font-family: Barlow;
+          font-size: 1rem;
+          font-weight: 800;
+          text-align: start;
+          text-transform: uppercase;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          .RoomPrivacy {
+            margin-right: 0.25rem;
+          }
+        }
+
+        .RoomOwner {
+          font-family: Montserrat;
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-align: start;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .ListRoomDivider {
+      background-color: rgba(@light, 0.25);
+      height: 0.1rem;
+      margin: 0.5rem 0rem;
+    }
+  }
+
+  .StudentProfile {
+    align-items: center;
+    background-color: @light;
+    border-radius: 5rem;
+    column-gap: 0.5em;
+    display: flex;
+    flex-direction: row;
+    grid-row-start: 3;
+    overflow: hidden;
+    padding: 0.5rem;
+
+    .Avatar {
+      border-radius: 100%;
+      max-height: 3rem;
+      max-width: 3rem;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+    }
+
+    .TextContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: 0.5rem;
+      overflow: hidden;
+      color: black;
+      text-align: start;
+      overflow: hidden;
+
+      .Login {
+        font-family: Barlow;
+        font-size: 1rem;
+        font-weight: 800;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .Quote {
+        font-family: Montserrat;
+        font-size: 0.7rem;
+        font-weight: 700;
+        opacity: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .ModifyProfileButton {
+      background-color: transparent;
+      color: @dark;
+      padding: 0.25rem;
+      margin-left: auto;
+      margin-right: 0.5rem;
+      border-radius: 100%;
+    }
+  }
+}
+
+.RoomCanvas {
+  display: grid;
+  flex-direction: column;
+  flex-grow: 0;
+  grid-template-rows: 0.25fr 9.75fr;
+  min-width: 50vw;
+  row-gap: 0em;
+  overflow: hidden;
+
+  .Header {
+    background-color: @base;
+    border-radius: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    grid-row-start: 1;
+    padding: 0.5rem;
+    z-index: 1;
+
+    .TextContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: end;
+
+      .Title {
+        color: @light;
+        font-family: Barlow;
+        font-size: 2rem;
+        font-weight: 800;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .Description {
+        // Start with the description hidden.
+        // It needs to be visible if the room has a description.
+        display: none;
+        position: relative;
+        top: -0.25rem;
+
+        color: @light;
+        font-family: Montserrat;
+        font-size: 0.5rem;
+        font-weight: 700;
+        opacity: 0.5;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .HeaderDivider {
+      background-color: rgba(@light, 0.25);
+      height: 100%;
+      margin: 0.5rem 0rem;
+      width: 0.1rem;
+    }
+
+    .ButtonContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .ReportButton {
+        background-color: @accent;
+        border-radius: 0.5rem;
+        border: 0px solid transparent;
+        color: @light;
+        display: block;
+        font-family: Montserrat;
+        font-size: 0.75rem;
+        font-weight: 700;
+        height: auto;
+        padding: 0.35rem 0.75rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .CanvasContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-row-start: 2;
+    overflow: hidden;
+    z-index: 0;
+
+    .Canvas {
+      transform: translate(0, 0) scale(2.5);
+    }
+
+    .Selector {
+      position: absolute;
+      inset: 0;
+      width: 1px;
+      height: 1px;
+      margin: auto;
+      pointer-events: none;
+    }
+
+    .Tooltip {
+      // The tooltip is a flexbox
+      // -> display: flex;
+      // Start with the tooltip hidden
+      display: none;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transform: translate(-50%, -150%);
+      background-color: @base;
+      border-radius: 0.5rem;
+      border: @accent 0.15rem solid;
+      padding: 0.5rem;
+
+      .Header {
+        display: flex;
+        gap: 0.75rem;
+
+        .PlacedByInfo {
+          position: relative;
+          display: inline-block;
+          height: 3rem;
+          width: 3rem;
+
+          .Avatar {
+            border-radius: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+          }
+
+          .Profile {
+            visibility: hidden;
+            background-color: @dark;
+            color: @light;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+
+            bottom: 100%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            position: absolute;
+            z-index: 1;
+
+            &::after {
+              content: " ";
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: @dark transparent transparent transparent;
+            }
+
+            .Login {
+              font-family: Barlow;
+              font-size: 0.8rem;
+              font-weight: 800;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            .Quote {
+              font-family: Montserrat;
+              font-size: 0.7rem;
+              font-weight: 700;
+              opacity: 0.5;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+
+          &:hover .Profile {
+            visibility: visible;
+          }
+        }
+
+        .TextContainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          font-family: Montserrat;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-align: left;
+        }
+      }
+
+      .ButtonContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        width: 100%;
+        font-family: Montserrat;
+        font-size: 0.75rem;
+        font-weight: 700;
+
+        .ColorPicker {
+          padding: 0.2rem;
+          outline: none;
+          color: white;
+          border: white 0.1rem solid;
+        }
+
+        .PlaceButton {
+          padding: 0.2rem;
+          border: @accent 0.1rem solid;
+          border-radius: 0.5rem;
+          outline: none;
+          font-family: Barlow;
+          font-size: 0.75rem;
+          font-weight: 800;
+
+          &:active {
+            background-color: @accent;
+            color: @light;
+          }
+
+          &:disabled {
+            background-color: @dark;
+            color: @accent;
+          }
+        }
+      }
+    }
+  }
+
+  .PositionTooltip {
+    background-color: rgba(@dark, 0.25);
+    padding: 0.5rem;
+    margin: 0.5rem auto auto 0;
+    border-radius: 0.5rem;
+    font-family: Montserrat;
+    font-weight: 700;
+    z-index: 2;
+  }
+
+  .ColorWheelContainer {
+    // The color wheel is a flexbox
+    // -> display: block;
+    // Start with the color wheel hidden
+    display: none;
+
+    background-color: @base;
+    margin: auto 0 0 auto;
+    padding: 0.5rem;
+    max-height: calc(100% - 12rem);
+    overflow: scroll;
+    border-radius: 1rem;
+    border: @accent 0.15rem solid;
+    z-index: 1;
+
+    min-block-size: -webkit-fill-available;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    transition: all 0.5s ease-in-out;
+
+    .ColorWheel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      margin: 0.25rem 0;
+    }
+  }
+}
+
+.RoomChat {
+  display: grid;
+  flex-grow: 0;
+  grid-auto-flow: row;
+  grid-template-rows: 1fr 8fr;
+  overflow: hidden;
+  padding: 0rem;
+  z-index: 1;
+  // Fully openned sidebar
+  // -> opacity: 1;
+  // Closed sidebar
+  opacity: 0;
+
+  transition: opacity 0.5s ease-in-out;
+
+  .ChatContainer {
+    background-color: @base;
+    border-radius: 0.5rem;
+    display: grid;
+    gap: 1em;
+    grid-row-start: 2;
+    grid-template-rows: 0.5fr 6.75fr 0.75fr;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    padding: 0.8rem;
+
+    .Header {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+
+    .ChatMessageContainer {
+      display: flex;
+      flex-direction: column-reverse;
+      overflow: auto;
+      padding: 0rem;
+      row-gap: 1em;
+
+      .ChatMessage {
+        color: @light;
+        background-color: rgba(black, 0.25);
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+
+        .MessageHeader {
+          column-gap: 0.5em;
+          display: flex;
+          padding: 0.5rem;
+          overflow: hidden;
+
+          .Avatar {
+            border-radius: 100%;
+            max-height: 2rem;
+            max-width: 2rem;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+          }
+
+          .Login {
+            font-family: Barlow;
+            font-weight: 800;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .Time {
+            font-family: Barlow;
+            margin-left: auto;
+            text-align: end;
+          }
+        }
+      }
+
+      .ChatUserEvent {
+        background-color: rgba(black, 0.25);
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem;
+        opacity: 0.5;
+      }
+
+      .ChatMessageMentionned {
+        background-color: rgba(@accent, 0.25);
+      }
+
+      .MessageContent {
+        font-family: Montserrat;
+        font-size: 0.75rem;
+        font-weight: 400;
+        overflow-wrap: break-word;
+        padding: 0.5rem;
+        text-align: start;
+      }
+    }
+  }
+}
+
+.Hidden {
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.CloseButton {
+  background-color: @accent;
+  border-radius: 0.5rem;
+  border: 0px solid transparent;
+  color: @light;
+  display: block;
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-weight: 700;
+  max-height: 2rem;
+  padding: 0.5rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.InputContainer {
+  background-color: rgba(black, 0.5);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  overflow: hidden;
+
+  .Divider {
+    background-color: @light;
+    height: 2rem;
+    width: 0.1rem;
+    opacity: 0.75;
+  }
+}
+
+.RoomButton {
+  background-color: rgba(@light, 0.25);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.ChatTimeout {
+  --fill-percent: 0;
+
+  border-radius: 50%;
+  padding: 0.25rem 0.5rem;
+
+  background: radial-gradient(
+      closest-side,
+      @dark 80%,
+      transparent 0 99.9%,
+      @dark 0
+    ),
+    conic-gradient(@accent calc(var(--fill-percent) * 1%), @dark 0);
+}
+
+.Input {
+  background-color: rgba(black, 0);
+  color: @light;
+  flex-grow: 1;
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 1;
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.FormOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(@dark, 0.95);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .StylisedForm {
+    background-color: @base;
+    padding: 2rem 1rem;
+    border: 0.25rem solid @accent;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-family: Barlow;
+    min-width: 65vw;
+    max-width: 90vw;
+    color: @light;
+
+    .FormHeader {
+      display: flex;
+      margin-bottom: 2rem;
+
+      .FormTitle {
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-align: center;
+      }
+    }
+
+    .FormItem {
+      display: grid;
+      grid-template-columns: 1fr 6fr;
+      width: 100%;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+
+      .FormLabel {
+        font-size: 1rem;
+        font-weight: 800;
+        text-align: end;
+      }
+
+      .FormInput {
+        color: @light;
+        grid-column: 2;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        font-family: Montserrat;
+        background-color: @dark;
+      }
+
+      .FormInput[type="checkbox"] {
+        width: auto;
+        margin-right: auto;
+      }
+    }
+
+    .FormButtons {
+      display: flex;
+      margin-top: 1rem;
+      gap: 0.5rem;
+      justify-content: space-around;
+
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+
+      [type="submit"] {
+        background-color: #ff4603;
+      }
+
+      button {
+        background-color: @dark;
+        color: @light;
+        border: 0.1rem solid #ff4603;
+
+        &:hover {
+          border: 0.1rem solid @light;
+        }
+      }
+    }
+  }
+}

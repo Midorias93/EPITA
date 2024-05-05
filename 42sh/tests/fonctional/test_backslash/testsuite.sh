@@ -1,0 +1,10 @@
+run_test back_echo_begining.test
+run_test back_echo_midle.test
+run_test back_echo_end.test
+run_test back_echo_arg.test
+run_test back_if.test
+run_test double_back_if.test
+run_test double_back_arg.test
+run_test back_quote.test
+run_test back_quote_hard1.test
+run_test double_back_quote.test

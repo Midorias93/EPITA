@@ -1,0 +1,4 @@
+echo toto > file4
+echo titi > file4
+echo tutu > file4
+cat file4

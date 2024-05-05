@@ -1,0 +1,54 @@
+{
+  "testsLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "getCanvasLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "getPixelLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "placePixelLimiter": {
+    "limit": 1,
+    "interval": 30
+  },
+  "getRoomsLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "getRoomConfigLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "createRoomLimiter": {
+    "limit": 1,
+    "interval": 300
+  },
+  "updateRoomLimiter": {
+    "limit": 1,
+    "interval": 1
+  },
+  "deleteRoomLimiter": {
+    "limit": 2,
+    "interval": 1
+  },
+  "getStudentLimiter": {
+    "limit": 10,
+    "interval": 1
+  },
+  "updateStudentLimiter": {
+    "limit": 1,
+    "interval": 1
+  },
+  "sendMessageLimiter": {
+    "limit": 1,
+    "interval": 1
+  },
+  "reportRoomLimiter": {
+    "limit": 1,
+    "interval": 5
+  }
+}

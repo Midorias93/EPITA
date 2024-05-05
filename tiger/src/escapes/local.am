@@ -1,0 +1,7 @@
+## escape module.
+
+src_libtc_la_SOURCES +=                                                        \
+  %D%/libescapes.hh %D%/libescapes.cc                                          \
+  %D%/escapes-visitor.hh %D%/escapes-visitor.cc
+
+TASKS += %D%/tasks.hh %D%/tasks.cc

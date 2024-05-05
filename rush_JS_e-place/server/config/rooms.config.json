@@ -1,0 +1,42 @@
+{
+  "maxRoomsCreatedPerUser": 3,
+  "rooms": {
+    "default": {
+      "metadata": {
+        "canvasDimensions": 50
+      },
+      "settings": {
+        "roomColors": "#ffffff,#d4d7d9,#898d90,#515252,#000000,#fe4500,#fea800,#fed634,#01a268,#7eed56,#2350a4,#3690ea,#51e9f4,#811f9f,#b44bc0,#ff99aa,#9c6925",
+        "defaultCanvas": "config/default-canvas-50.txt"
+      }
+    },
+    "epi-place": {
+      "metadata": {
+        "name": "epi/place",
+        "description": "Main room for the entire promotion",
+        "canvasDimensions": 250,
+        "isPublic": true
+      },
+      "settings": {
+        "roomColors": "#ffffff,#d4d7d9,#898d90,#515252,#000000,#6c001a,#be0039,#fe4500,#fea800,#fed634,#fff8b8,#01a268,#00cc78,#7eed56,#02756f,#019eaa,#00ccbf,#2350a4,#3690ea,#51e9f4,#493ac1,#6a5cff,#94b3ff,#811f9f,#b44bc0,#e4aaff,#de107f,#ff3981,#ff99aa,#6d482f,#9c6925,#ffb470",
+        "defaultCanvas": "config/default-canvas-250.txt"
+      },
+      "rateLimitsOverride": {
+        "placePixelLimiter": {
+          "interval": 60
+        }
+      }
+    },
+    "test": {
+      "metadata": {
+        "name": "Test Room",
+        "description": "A room small enough to test things out",
+        "canvasDimensions": 10,
+        "isPublic": true
+      },
+      "settings": {
+        "roomColors": "#ffffff,#d4d7d9,#898d90,#515252,#000000,#fe4500,#fea800,#fed634,#01a268,#7eed56,#2350a4,#3690ea,#51e9f4,#811f9f,#b44bc0,#ff99aa,#9c6925"
+      }
+    }
+  }
+}

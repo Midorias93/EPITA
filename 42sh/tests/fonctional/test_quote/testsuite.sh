@@ -1,0 +1,10 @@
+run_test simple_quote.test
+run_test quote_back.test
+run_test quote_in_if.test
+run_test quote_builtin_echo.test
+run_test quote_builtin_echo2.test
+run_test double_quote_builtin_echo.test
+run_test double_quote_builtin_echo2.test
+run_test echo_quote_var.test
+run_test echo_double_quote_var.test
+run_test double_quote_in_echo.test

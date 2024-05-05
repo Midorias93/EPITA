@@ -1,0 +1,1 @@
+if false | true; then echo toto; fi
